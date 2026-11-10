@@ -1,0 +1,21 @@
+{
+    "policy": {
+        "mariadb_release_status": "Stable",
+        "mariadb_support_type": "any",
+        "php_windows_build": "nts",
+        "php_windows_arch": "x64",
+        "max_download_mb": 700,
+        "check_interval_hours": 6,
+        "allow_major_mariadb_upgrade": false,
+        "mariadb_prefer_lts": true,
+        "phpmyadmin_compatibility_policy": "advisory"
+    },
+    "official_sources": {
+        "mariadb": "https://downloads.mariadb.org/rest-api/mariadb/",
+        "php_windows": "https://downloads.php.net/~windows/releases/",
+        "php_portable_linux": "https://dl.static-php.dev/v3/php-bin/bulk/",
+        "phpmyadmin": "https://www.phpmyadmin.net/home_page/version.json",
+        "phpmyadmin_download": "https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.zip",
+        "php_supported_versions": "https://www.php.net/releases/index.php?json"
+    }
+}

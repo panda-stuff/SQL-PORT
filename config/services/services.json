@@ -1,0 +1,55 @@
+{
+    "application": {
+        "name": "SQL PORT",
+        "host": "127.0.0.1",
+        "port": 4096,
+        "startup_file": "index.php",
+        "document_root": "app",
+        "open_browser": true,
+        "manager_port": 4097
+    },
+    "services": [
+        {
+            "name": "MariaDB",
+            "enabled": true,
+            "executable": {
+                "windows": "modules/mariadb/bin/mariadbd.exe",
+                "linux": "modules/mariadb/bin/mariadbd"
+            },
+            "arguments": [
+                "--defaults-file={app}/config/services/mariadb.ini"
+            ],
+            "working_directory": ".",
+            "environment": {},
+            "start_order": 1,
+            "version_command": [
+                "--version"
+            ],
+            "update_url": "https://mariadb.org/download/"
+        },
+        {
+            "name": "PHP",
+            "enabled": true,
+            "executable": {
+                "windows": "modules/php/php.exe",
+                "linux": "modules/php/bin/php"
+            },
+            "arguments": [
+                "-c",
+                "{app}/config/services/php.ini",
+                "-S",
+                "{host}:{port}",
+                "-t",
+                "{document_root}",
+                "{document_root}/router.php"
+            ],
+            "working_directory": ".",
+            "environment": {},
+            "start_order": 2,
+            "version_command": [
+                "-v"
+            ],
+            "update_url": "https://www.php.net/downloads.php"
+        }
+    ]
+}

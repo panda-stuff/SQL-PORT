@@ -1,0 +1,7 @@
+[PHP]
+display_errors=On
+log_errors=On
+extension_dir="ext"
+extension=pdo_mysql
+extension=mysqli
+session.save_path="data"

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SQL PORT — Manager</title>
+    <link rel="icon" href="/favicon.png?v=3" type="image/png" sizes="32x32">
+    <link rel="shortcut icon" href="/favicon.ico?v=3" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <main class="shell">
+        <header class="top">
+            <div class="identity">
+                <span class="mark"><img src="/icon.png" alt="SQL PORT"></span>
+                <div><h1>SQL PORT</h1><p>Local Server Manager</p></div>
+            </div>
+            <div class="top-actions">
+                <button id="theme_toggle" class="btn outline theme-icon-button" title="Switch to light theme" aria-label="Switch to light theme" type="button">
+                    <svg class="theme-sun" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+                    <svg class="theme-moon" xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.985 12.486A9 9 0 0 1 11.514 3.015 9 9 0 1 0 20.985 12.486Z"/></svg>
+                </button>
+                <span class="pill" id="server_status">Connecting…</span>
+            </div>
+        </header>
+        <section class="section-head"><h2>Services</h2><button class="btn primary" id="open_main" type="button">Open Application ↗</button></section>
+        <div id="services" class="stack"><p class="muted">Loading services…</p></div>
+        <section class="panel manager-actions">
+            <div class="actions">
+                <button class="btn outline" id="restart_all">Restart Services</button>
+                <button class="btn outline" id="stop_all">Stop Services</button>
+                <button class="btn danger" id="quit_all">Quit SQL PORT</button>
+            </div>
+            <p class="global-action-status muted small" id="message" role="status" aria-live="polite"></p>
+        </section>
+        <p class="footer">Closing the browser does not stop the services. Use the tray icon or Quit to close SQL PORT.</p>
+    </main>
+    <dialog id="config_dialog" class="config-dialog">
+        <form method="dialog" id="config_form">
+            <div class="config-head"><strong id="config_title">Configuration</strong><button class="btn outline" value="cancel" type="submit">Close</button></div>
+            <p class="muted small" id="config_path"></p>
+            <textarea id="config_content" spellcheck="false" rows="17"></textarea>
+            <div class="actions"><button class="btn primary" value="save" id="config_save" type="button">Save changes</button></div>
+        </form>
+    </dialog>
+    <dialog id="reset_dialog" class="config-dialog">
+        <form method="dialog">
+            <h2>Reset Main Database</h2>
+            <p class="error-text">This permanently deletes every table and record in the main database. Other databases are not deleted. A local SQL backup is created first.</p>
+            <label for="reset_password">Current MariaDB root password (leave blank if none)</label>
+            <input id="reset_password" type="password" autocomplete="off" placeholder="Default: root">
+            <label for="reset_confirmation">Type RESET MAIN to continue</label>
+            <input id="reset_confirmation" type="text" autocomplete="off" spellcheck="false">
+            <p class="error-text" id="reset_error" role="alert"></p>
+            <div class="actions">
+                <button class="btn outline" value="cancel" type="submit">Cancel</button>
+                <button class="btn danger" id="reset_execute" type="button" disabled>Reset Database</button>
+            </div>
+        </form>
+    </dialog>
+    <dialog id="confirm_dialog" class="confirm-dialog" aria-labelledby="confirm_title" aria-describedby="confirm_text">
+        <div class="confirm-heading">
+            <span class="confirm-symbol" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5m0 3h.01"/></svg>
+            </span>
+            <div class="confirm-copy">
+                <h2 id="confirm_title">Confirm action</h2>
+                <p id="confirm_text" class="muted"></p>
+            </div>
+        </div>
+        <div class="confirm-actions">
+            <button class="btn outline" id="confirm_cancel" type="button">Cancel</button>
+            <button class="btn primary" id="confirm_accept" type="button">Continue</button>
+        </div>
+    </dialog>
+</body>
+</html>
